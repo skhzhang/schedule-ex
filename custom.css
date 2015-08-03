@@ -1,0 +1,213 @@
+body {
+	background-color: #FEFFF2;
+}
+
+th, td {
+	border: 1px solid gray;
+} 
+
+tr {
+	height: 43px;
+}
+
+table {
+	background-color: white;
+}
+
+.times, .times table {
+	display: none;
+	border: 0px;
+}
+
+.container {
+	display: block;
+	margin: 25px;
+}
+
+.container-head {
+	margin-bottom: 10px;
+}
+
+.sched-title {
+	display: block;
+	text-align: center;
+	height: 40px;
+	border: 1px solid gray;
+
+	background-color: lightgray;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.container-body {
+	display: table-body-group;
+	border: 0px;
+}
+
+.week {
+	display: block;
+}
+
+.times {
+	display: table-cell;
+
+	text-align: center;
+}
+
+.times th {
+	background-color: lightgray;
+	border: 1px solid gray;
+}
+
+.day,
+.day table,
+.day thead,
+.day tbody {
+	display: block;
+	border: 0px;
+}
+
+.day {
+	margin-bottom: 10px;
+}
+
+.day tr {
+	display: none;
+}
+
+.day thead th,
+.event td {
+	display: block;
+}
+
+.day-name th {
+	background-color: lightgray;
+}
+
+.day-name {
+	display: block !important;
+
+	height: 23px;
+}
+
+.event {
+	display: block !important;
+
+	text-align: center;
+}
+
+.event-time {
+	position: absolute;
+	left: 40px;
+
+	color: #383838;
+	font-size: 14px;
+}
+
+.course4 .event-time{
+	color: #E8E8E8;
+}
+
+.course1 {
+	background-color: #A9D08E;
+}
+
+.course2 {
+	background-color: #5B9BD5;
+}
+
+.course3 {
+	background-color: #ED7D31;
+}
+
+.course4 {
+	color: #FAFAFA;
+	background-color: #7030A0;
+}
+
+
+
+.course5 {
+	background-color: #FFC000;
+}
+
+@media(min-width: 650px){
+
+	.container {
+		margin: 25px auto 50px auto;
+	}
+
+	tr {
+		height: 30px;
+	}
+
+	.times, .day {
+		border: 1px solid gray;
+		border-right: 0px solid gray;
+	}
+
+	.day:last-child table{
+		border-right: 1px solid gray;
+	}
+
+	.container {
+		display: table;
+	}
+
+	.week {
+		display: table-row;
+	}
+
+	.times {
+		display: table-cell;
+	}
+
+	.times table {
+		display: table;
+	}
+
+	.day {
+		display: table-cell;
+	}
+
+	.day table {
+		display: table;
+
+		empty-cells: hide;
+	}
+
+	.day tbody {
+		display: table-body-group;
+	}
+
+	.day thead {
+		display: table-header-group;
+	}
+
+	.day thead tr {
+		display: table-row;
+	}
+
+	.day thead th {
+		display: table-cell;
+	}
+
+	.day tr {
+		display: table-row !important;
+	}
+
+	.day-name {
+		display: table-row;
+		height: 30px;
+	}
+
+	.event td {
+		display: table-cell;
+	}
+
+	.event-time {
+		display: block;
+		position: static;
+	}
+
+}

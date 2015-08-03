@@ -2,223 +2,629 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Schedule</title>
-		<style>
+		<title>Simon's Fall 2015 Course Schedule</title>
+  		<meta name="author" content="Simon Zhang">
+  		<meta name="description" content="Simon's Fall 2015 Course Schedule">
 
-		table, th, td {
-   			border: 1px solid black;
-		} 
-
-		tr {
-			height: 30px;
-		}
-
-		table {
-			empty-cells: hide;
-		}
-
-		</style>
+  		<link rel="stylesheet" href="custom.css">
 	</head>
 	<body>
 
-		<table>
-			<thead>
-				<tr>
-					<th colspan="6">My Schedule</th>
-				</tr>
-				<tr>
-					<th></th>
-					<th>Monday</th>
-					<th>Tuesday</th>
-					<th>Wednesday</th>
-					<th>Thursday</th>
-					<th>Friday</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th rowspan="2">8:00 - 9:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td rowspan="2">CISC 365 Lecture</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">9:00 - 10:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td rowspan="4">CISC 365 Lab</td>
-				</tr>
-				<tr>
-					<th rowspan="2">10:00 - 11:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td rowspan="2">CISC 365 Lecture</td>
-				</tr>
-				<tr>
-					<th rowspan="2">11:00 - 12:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td rowspan="2">CISC 326 Lecture</td>
-					<td></td>
-					<td rowspan="3">CISC 340 Lecture</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">12:00 - 1:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td rowspan="2">CISC 326 Lecture</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">1:00 - 2:00</th>
-					<td rowspan="3">CISC 340 Lecture</td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td rowspan="2">CISC 326 Lecture</td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">2:00 - 3:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td rowspan="4">CISC 340 Lab</td>
-					<td rowspan="2">CISC 320 Lab</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">3:00 - 4:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td rowspan="2">CISC 320 Lecture</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">4:00 - 5:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td rowspan="2">CISC 365 Lecture</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td rowspan="2">CISC 320 Lecture</td>
-				</tr>
-				<tr>
-					<th rowspan="2">5:00 - 6:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">6:00 - 7:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td rowspan="6">ECON 111 Lecture</td>
-					<td></td>
-					<td></td>
-					<td rowspan="6">CISC 320 Tutorial</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">7:00 - 8:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">8:00 - 9:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th rowspan="2">9:00 - 10:00</th>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-
+		<div class="container">
+			<div class="container-head">
+					<div class="head-row">
+						<div class="sched-title">Simon's Fall 2015 Course Schedule</div>
+					</div>
+			</div>
+			<div class="container-body">
+				<div class="week">
+					<div class="times"> <!-- Times -->
+						<table>
+							<thead>
+								<tr>
+									<th>---</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr> <!-- 8 - 9 -->
+									<th rowspan="2">8:00 to 9:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<th rowspan="2">9:00 to 10:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 10 - 11 -->
+									<th rowspan="2">10:00 to 11:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 11 - 12 -->
+									<th rowspan="2">11:00 to 12:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 12 - 1 -->
+									<th rowspan="2">12:00 to 1:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 1 - 2 -->
+									<th rowspan="2">1:00 to 2:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 2 - 3 -->
+									<th rowspan="2">2:00 to 3:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 3 - 4 -->
+									<th rowspan="2">3:00 to 4:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 4 - 5 -->
+									<th rowspan="2">4:00 to 5:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 5 - 6 -->
+									<th rowspan="2">5:00 to 6:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 6 - 7 -->
+									<th rowspan="2">6:00 to 7:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 7 - 8 -->
+									<th rowspan="2">7:00 to 8:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 8 - 9 -->
+									<th rowspan="2">8:00 to 9:00</th>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<th rowspan="2">9:00 to 10:00</th>
+								</tr>
+								<tr>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="day"> <!-- Monday -->
+						<table>
+							<thead>
+								<tr class="day-name">
+									<th>Monday</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr> <!-- 8 - 9 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 10 - 11 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 11 - 12 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course1" rowspan="2">
+										<span class="event-time">11:30 to 12:30<br/></span>
+										CISC 326 Lecture
+										<br>
+										Biosci 1102
+									</td>
+								</tr>
+								<tr> <!-- 12 - 1 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr class="event"> <!-- 1 - 2 -->
+									<td class="course2" rowspan="3">
+										<span class="event-time">1:00 to 2:30</span>
+										CISC 340 Lecture
+										<br>
+										Ellis Hall 333
+									</td>
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 2 - 3 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 3 - 4 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 4 - 5 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course3" rowspan="2">
+										<span class="event-time">4:30 to 5:30</span>
+										CISC 365 Lecture
+										<br>
+										Walter Light Hall 205
+									</td>
+								</tr>
+								<tr> <!-- 5 - 6 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 6 - 7 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course4" rowspan="6">
+										<span class="event-time">6:30 to 9:30</span>
+										ECON 111 Lecture
+										<br>
+										Biosci Auditorium
+									</td>
+								</tr>
+								<tr> <!-- 7 - 8 -->
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 8 - 9 -->
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="day"> <!-- Tuesday -->
+						<table>
+							<thead>
+								<tr class="day-name">
+									<th>Tuesday</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr> <!-- 8 - 9 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 10 - 11 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 11 - 12 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 12 - 1 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 1 - 2 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course1" rowspan="2">
+										<span class="event-time">1:30 to 2:30</span>
+										CISC 326 Lecture
+										<br>
+										Biosci 1102
+									</td>
+								</tr>
+								<tr> <!-- 2 - 3 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 3 - 4 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course5" rowspan="2">
+										<span class="event-time">3:30 to 4:30</span>
+										CISC 320 Lecture
+										<br>
+										Jeffrey Hall 128
+									</td>
+								</tr>
+								<tr> <!-- 4 - 5 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 5 - 6 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 6 - 7 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 7 - 8 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 8 - 9 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="day"> <!-- Wednesday -->
+						<table>
+							<thead>
+								<tr class="day-name">
+									<th>Wednesday</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr> <!-- 8 - 9 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course3" rowspan="2">
+										<span class="event-time">8:30 to 9:30</span>
+										CISC 365 Lecture
+										<br>
+										Humphrey Hall Auditorium
+									</td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 10 - 11 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 11 - 12 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course2" rowspan="3">
+										<span class="event-time">11:30 to 1:00</span>
+										CISC 340 Lecture
+										<br>
+										Ellis Hall 333
+									</td>
+								</tr>
+								<tr> <!-- 12 - 1 -->
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 1 - 2 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 2 - 3 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course2" rowspan="4">
+										<span class="event-time">2:30 to 4:30</span>
+										CISC 340 Lab
+										<br>
+										Goodwin Hall 248
+									</td>
+								</tr>
+								<tr> <!-- 3 - 4 -->
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 4 - 5 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 5 - 6 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 6 - 7 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 7 - 8 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 8 - 9 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="day"> <!-- Thursday -->
+						<table>
+							<thead>
+								<tr class="day-name">
+									<th>Thursday</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr> <!-- 8 - 9 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 10 - 11 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course3" rowspan="2">
+										<span class="event-time">10:30 to 11:30</span>CISC 365 Lecture
+										<br>
+										Humphrey Hall Auditorium
+									</td>
+								</tr>
+								<tr> <!-- 11 - 12 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 12 - 1 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course1" rowspan="2">
+										<span class="event-time">12:30 to 1:30</span>
+										CISC 326 Lecture
+										<br>
+										Biosci 1102
+									</td>
+								</tr>
+								<tr> <!-- 1 - 2 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 2 - 3 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course5" rowspan="2">
+										<span class="event-time">2:30 to 3:30</span>
+										CISC 320 Lecture
+										<br>
+										Jeffrey Hall 128
+									</td>
+								</tr>
+								<tr> <!-- 3 - 4 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 4 - 5 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 5 - 6 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 6 - 7 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course5" rowspan="4">
+										<span class="event-time">6:30 to 8:30</span>
+										CISC 320 Tutorial
+										<br>
+										Ellis Hall 321
+									</td>
+								</tr>
+								<tr> <!-- 7 - 8 -->
+								</tr>
+								<tr>
+								</tr>
+								<tr> <!-- 8 - 9 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="day"> <!-- Friday -->
+						<table>
+							<thead>
+								<tr class="day-name">
+									<th>Friday</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr> <!-- 8 - 9 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course3" rowspan="2">
+										<span class="event-time">9:30 to 10:30</span>
+										CISC 365 Lab
+										<br>
+										Jeffrey Hall 155
+									</td>
+								</tr>
+								<tr> <!-- 10 - 11 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 11 - 12 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 12 - 1 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 1 - 2 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 2 - 3 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 3 - 4 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 4 - 5 -->
+									<td></td>
+								</tr>
+								<tr class="event">
+									<td class="course5" rowspan="2">
+										<span class="event-time">4:30 to 5:30</span>
+										CISC 320 Lecture
+										<br>
+										Jeffrey Hall 128
+									</td>
+								</tr>
+								<tr> <!-- 5 - 6 -->
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 6 - 7 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 7 - 8 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 8 - 9 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+								<tr> <!-- 9 - 10 -->
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
