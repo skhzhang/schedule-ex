@@ -98,10 +98,19 @@ table {
 
 .event-time {
 	position: absolute;
-	left: 40px;
+	left: 45px;
+	text-align: left;
 
 	color: #383838;
 	font-size: 14px;
+}
+
+.event-time-space {
+	display: none;
+}
+
+.course1, .course2, .course3, .course4, .course5 {
+	overflow: hidden;
 }
 
 .course4 .event-time{
@@ -131,8 +140,20 @@ table {
 	background-color: #FFC000;
 }
 
-@media(min-width: 650px){
+@media(max-width: 425px){
+	.event-time-space {
+		display: block;
+	}
 
+	.event-info {
+		position: static;
+		float: right;
+		margin-right: 10px;
+		text-align: right;
+	}
+}
+
+@media(min-width: 700px){
 	.container {
 		margin: 25px auto 50px auto;
 	}
@@ -208,6 +229,19 @@ table {
 	.event-time {
 		display: block;
 		position: static;
+		text-align: center;
 	}
 
+	.truncate {
+		max-width: 100px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+@media(min-width: 925px){
+	.truncate {
+		max-width: 200px;
+	}
 }
