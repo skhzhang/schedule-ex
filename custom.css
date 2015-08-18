@@ -154,9 +154,6 @@ table {
 }
 
 @media(min-width: 700px){
-	.container {
-		margin: 25px auto 50px auto;
-	}
 
 	tr {
 		height: 30px;
@@ -172,6 +169,7 @@ table {
 	}
 
 	.container {
+		margin: 25px auto 50px auto;
 		display: table;
 	}
 
