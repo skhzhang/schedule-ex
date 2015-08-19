@@ -5,11 +5,11 @@ body {
 
 th, td {
 	border: 1px solid gray;
+	margin-bottom: 3px;
 } 
 
 tr {
-	height: 43px;
-	border-bottom: 0px;
+	border-bottom: 0;
 }
 
 table {
@@ -18,7 +18,7 @@ table {
 
 .times, .times table {
 	display: none;
-	border: 0px;
+	border: 0;
 }
 
 .container {
@@ -27,24 +27,20 @@ table {
 }
 
 .container-head {
-	margin-bottom: 32px;
-}
-
-.sched-title {
 	display: block;
 	text-align: center;
 
 	font-size: 34px;
 	font-weight: bold;
 
-	padding: 32px 0px 32px 0px;
-	margin: 0px 10% 0px 10%;
+	padding: 32px 0 32px 0;
+	margin: 0 10% 32px 10%;
 	border-bottom: 2px dotted #98ADB0;
 }
 
 .container-body {
-	display: table-body-group;
-	border: 0px;
+	display: block;
+	border: 0;
 }
 
 .week {
@@ -53,7 +49,6 @@ table {
 
 .times {
 	display: table-cell;
-
 	text-align: center;
 }
 
@@ -68,7 +63,7 @@ table {
 .day thead,
 .day tbody {
 	display: block;
-	border: 0px;
+	border: 0;
 }
 
 .day {
@@ -156,17 +151,17 @@ table {
 
 @media(min-width: 700px){
 
-	tr {
-		height: 30px;
-	}
-
 	.times, .day {
 		border: 1px solid gray;
-		border-right: 0px solid gray;
+		border-right: 0 solid gray;
 	}
 
 	.day:last-child table{
 		border-right: 1px solid gray;
+	}
+	
+	.day th {
+		border-bottom: none;
 	}
 
 	.container {
@@ -188,27 +183,27 @@ table {
 
 	.day {
 		display: table-cell;
+		vertical-align: top;
 	}
 
 	.day table {
 		display: table;
-
 		empty-cells: hide;
 	}
 
 	.day tbody {
-		display: table-body-group;
+		display: table-row-group;
 	}
 
 	.day thead {
 		display: table-header-group;
 	}
 
-	.day thead tr {
+	.day tr {
 		display: table-row;
 	}
 
-	.day thead th {
+	.day th {
 		display: table-cell;
 	}
 
@@ -218,11 +213,51 @@ table {
 
 	.day-name {
 		display: table-row;
-		height: 30px;
 	}
 
-	.event td {
+	.times td,
+	.times th,
+	.day td,
+	.day th {
 		display: table-cell;
+		height: 30px;
+		box-sizing: border-box;
+		margin-bottom: 0;
+	}
+	
+	.times td[rowspan="2"],
+	.times th[rowspan="2"],
+	.day th[rowspan="2"],
+	.day td[rowspan="2"] {
+		height: 60px;
+	}
+	
+	.times td[rowspan="3"],
+	.times th[rowspan="3"],
+	.day th[rowspan="3"],
+	.day td[rowspan="3"] {
+		height: 90px;
+	}
+	
+	.times td[rowspan="4"],
+	.times th[rowspan="4"],
+	.day th[rowspan="4"],
+	.day td[rowspan="4"] {
+		height: 120px;
+	}
+	
+	.times td[rowspan="5"],
+	.times th[rowspan="5"],
+	.day th[rowspan="5"],
+	.day td[rowspan="5"] {
+		height: 150px;
+	}
+	
+	.times td[rowspan="6"],
+	.times th[rowspan="6"],
+	.day th[rowspan="6"],
+	.day td[rowspan="6"] {
+		height: 180px;
 	}
 
 	.event-time {
@@ -232,7 +267,9 @@ table {
 	}
 
 	.truncate {
-		max-width: 100px;
+		max-width: 120px;
+		margin-left: auto;
+		margin-right: auto;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -241,6 +278,6 @@ table {
 
 @media(min-width: 925px){
 	.truncate {
-		max-width: 200px;
+		max-width: 130px;
 	}
 }
