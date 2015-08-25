@@ -11,6 +11,105 @@
 	</head>
 	<body>
 
+		<?php
+
+			class TimeHoursMins {
+
+				public $hours; // 24h clock
+				public $minutes; 
+
+				public function __construct($hours, $minutes) {
+					$this->hours = $hours;
+					$this->minutes = $minutes;
+				}
+
+				public function getTime24h() { // return in 24h clock
+					return $this->hours . ':' . $this->minutes;
+				}
+
+				public function getTime12h($addPeriod) { // return in 12h clock
+					$period = '';
+
+					if ($addPeriod) {
+						$period = ' AM';
+						if ($this->hours > 11) {
+							$period = ' PM';
+						}
+					}
+
+					return ($this->hours-1)%12+1 . ':' . sprintf("%02d", $this->minutes) . $period;
+				}
+
+				public function __toString(){
+					return $this->getTime24h();
+				}
+
+			}
+
+			class SchedEvent {
+
+				public $weekday;
+				public $starttime;
+				public $endtime;
+				public $title;
+				public $location;
+
+				public function __construct($weekday, TimeHoursMins $starttime, TimeHoursMins $endtime, $title, $location) {
+					$this->weekday = $weekday;
+					$this->starttime = $starttime;
+					$this->endtime = $endtime;
+					$this->title = $title;
+					$this->location = $location;
+				}
+
+				// GET
+				public function getTimeslot() {
+					return $this->starttime . ' to ' . $this->endtime;
+				}
+
+				// SET
+				public function setWeekday($newDay) {
+					$this->weekday = $newDay;
+				}
+
+				public function setStartTime(TimeHoursMins $newStartTime) {
+					$this->starttime = $newStartTime;
+				}
+
+				public function setEndTime(TimeHoursMins $newEndTime) {
+					$this->endtime = $newEndTime;
+				}
+
+				public function setTitle($newTitle) {
+					$this->title = $newTitle;
+				}
+
+				public function setLocation($newLocation) {
+					$this->location = $newLocation;
+				}
+			}
+
+			/*
+			// Examples of using TimeHoursMins and SchedEvent 
+			$event1 = new SchedEvent('Monday', new TimeHoursMins(8, 30), new TimeHoursMins(9, 30), 'Underwater Basket Weaving', 'Lake Ontario');
+
+			echo $event1->getTimeslot() . "<br>";
+			echo $event1->title . "<br>";
+			echo $event1->location . "<br>";
+
+			$event1->setLocation('ARC');
+
+			echo $event1->location . "<br>";
+
+			$event1->setStartTime(new TimeHoursMins(13, 00));
+
+			echo $event1->starttime->getTime12h(false) . "<br>";
+			echo $event1->starttime->getTime12h(true);
+			*/
+			
+
+		?>
+
 		<div class="container">
 			<div class="container-head">Simon's Fall 2015 Course Schedule</div>
 			<div class="container-body">
