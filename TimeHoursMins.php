@@ -2,8 +2,8 @@
 
 class TimeHoursMins {
 
-	private $hours; // 24h clock
-	private $minutes; 
+	private $hours;
+	private $minutes;
 
 	public function __construct($hours, $minutes) {
 
@@ -39,6 +39,8 @@ class TimeHoursMins {
 	}
 
 	// SET
+
+	// $newHours must be an int between 0-23
 	public function setHours($newHours) {
 
 		if (!is_int($newHours)) {
@@ -51,13 +53,14 @@ class TimeHoursMins {
 		$this->hours = $newHours;
 	}
 
+	// $newMinutes must be an int between 0-59
 	public function setMinutes($newMinutes) {
 
 		if (!is_int($newMinutes)) {
 			throw new Exception('Minutes must be an integer.');
 		}
 		else if ($newMinutes < 0 || $newMinutes > 59) {
-			throw new Exception('Minutes must be between 0-23.');
+			throw new Exception('Minutes must be between 0-59.');
 		}
 
 		$this->minutes = $newMinutes;
