@@ -3,6 +3,11 @@ body {
 	background-color: #EFF3F5;
 }
 
+.exception {
+	color: red;
+	font-weight: bold;
+}
+
 th, td {
 	border: 1px solid gray;
 	margin-bottom: 3px;
