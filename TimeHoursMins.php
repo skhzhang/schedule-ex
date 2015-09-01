@@ -66,6 +66,13 @@ class TimeHoursMins {
 		$this->minutes = $newMinutes;
 	}
 
+	public function getTimeDifference(TimeHoursMins $other) {
+
+		$hourDifference = $other->hours - $this->hours;
+		$minuteDifference = $other->minutes - $this->minutes;
+
+		return $hourDifference * 60 + $minuteDifference;
+	}
 }
 
 ?>

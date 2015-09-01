@@ -67,6 +67,30 @@ class SchedEvent {
 	public function setLocation($newLocation) {
 		$this->location = (string)$newLocation;
 	}
+
+	// Compares the start times of two 'SchedEvent's and returns the minutes between the two.
+	// If the start times are the same, 
+	// compare the end time difference and return the minutes between the two.
+	// If the end times are the same,
+	// compare the alphanumeric values of the event titles and return the difference.
+
+	// For use with usort(), to sort arrays of SchedEvent
+	public static function getEventTimeDifference(SchedEvent $a, SchedEvent $b) {
+
+		$difference = $b->starttime->getTimeDifference($a->starttime); // start time difference 
+
+		if ($difference == 0) {
+			$endDifference = $b->endtime->getTimeDifference($a->endtime); // end time difference 
+			$difference += $endDifference;
+		}
+		if ($difference == 0) {
+			$ordDifference = strnatcmp($a->title, $b->title); // alphanumeric difference
+			$difference += $ordDifference;
+		}
+
+		return $difference;
+	}
+
 }
 
 ?>

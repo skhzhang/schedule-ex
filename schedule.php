@@ -20,23 +20,31 @@
 			/*
 			try {
 
-				$event1 = new SchedEvent('Monday', new TimeHoursMins(8, 30), new TimeHoursMins(9, 30), 'Underwater Basket Weaving', 'Lake Ontario');
+				$event1 = new SchedEvent('Monday', new TimeHoursMins(8, 30), new TimeHoursMins(9, 30), 'Underwater Basket Weaving', 'ARC');
+				$event2 = new SchedEvent('Monday', new TimeHoursMins(6, 30), new TimeHoursMins(7, 30), 'Water Polo', 'ARC');
+				$event3 = new SchedEvent('Monday', new TimeHoursMins(12, 30), new TimeHoursMins(13, 30), 'Astronomy 101', 'Ellis Hall');
+				$event4 = new SchedEvent('Monday', new TimeHoursMins(12, 30), new TimeHoursMins(13, 30), 'Astronomy 102', 'Ellis Hall');
+				$event5 = new SchedEvent('Monday', new TimeHoursMins(6, 30), new TimeHoursMins(7, 30), 'Water Polo', 'ARC');
+				$event6 = new SchedEvent('Monday', new TimeHoursMins(7, 30), new TimeHoursMins(8, 30), 'Swimming 101', 'ARC');
+				$event7 = new SchedEvent('Monday', new TimeHoursMins(7, 30), new TimeHoursMins(8, 45), 'Swimming 102', 'ARC');
+				$event8 = new SchedEvent('Monday', new TimeHoursMins(12, 30), new TimeHoursMins(13, 30), 'Lunch', 'ARC');
 
+				echo $event1->getTitle() . ": " . $event1->getTimeslot12h(true) . " at " . $event1->getLocation() ."<br>";
 				echo $event1->getTimeslot24h() . "<br>";
-				echo $event1->getTimeslot12h(true) . "<br>";
-				echo $event1->getTitle() . "<br>";
-				echo $event1->getLocation() . "<br>";
 				echo "<br>";
 
-				$event1->setStartTime(new TimeHoursMins(22, 15));
-				$event1->setEndTime(new TimeHoursMins(23, 30));
-				$event1->setTitle('Swimming');
-				$event1->setLocation('ARC');
+				$event1->setStartTime(new TimeHoursMins(9, 30));
+				$event1->setEndTime(new TimeHoursMins(11, 30));
+				$event1->setTitle('Underwater Basket Weaving 101');
+				$event1->setLocation('Lake Ontario');
 
-				echo $event1->getTimeslot24h() . "<br>";
-				echo $event1->getTimeslot12h(false) . "<br>";
-				echo $event1->getTitle() . "<br>";
-				echo $event1->getLocation() . "<br>";
+				$events = array($event1, $event2, $event3, $event4, $event5, $event6, $event7, $event8);
+
+				usort($events, array("SchedEvent", "getEventTimeDifference"));
+
+				foreach ($events as $item) {
+				    echo $item->getTitle() . ": " . $item->getTimeslot12h(true) . " at " . $item->getLocation() ."<br>";
+				}
 			
 			}
 			catch (Exception $e) {
