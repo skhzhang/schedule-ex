@@ -8,12 +8,17 @@ class SchedEvent {
 	private $title;
 	private $location;
 
-	public function __construct($weekday, TimeHoursMins $starttime, TimeHoursMins $endtime, $title, $location) {
+	public function __construct($weekday, TimeHoursMins $starttime, TimeHoursMins $endtime, $title, $location, $category) {
 		$this->setWeekday($weekday);
 		$this->setStartTime($starttime);
 		$this->setEndTime($endtime);
 		$this->setTitle($title);
 		$this->setLocation($location);
+		$this->setCategory($category);
+
+		if ($starttime->getTimeDifference($endtime) < 0) { // if start time comes after end time
+			throw new Exception ('Invalid event times - start time cannot be after end time.');
+		}
 	}
 
 	// GET
@@ -47,6 +52,10 @@ class SchedEvent {
 		return $this->location;
 	}
 
+	public function getCategory() {
+		return $this->category;
+	}
+
 	// SET
 	public function setWeekday($newDay) {
 		$this->weekday = (string)$newDay;
@@ -66,6 +75,10 @@ class SchedEvent {
 
 	public function setLocation($newLocation) {
 		$this->location = (string)$newLocation;
+	}
+
+	public function setCategory($newCategory) {
+		$this->category = (string)$newCategory;
 	}
 
 	// Compares the start times of two 'SchedEvent's and returns the minutes between the two.
@@ -89,6 +102,26 @@ class SchedEvent {
 		}
 
 		return $difference;
+	}
+
+	// returns the event length as int, in unit of time (rounds up) depending on parameter
+	// eg. 'hours', 'minutes'
+	public function getEventLength($unitOfTime) {
+		$eventLength = $this->getStartTime()->getTimeDifference($this->getEndTime());
+
+		if ($unitOfTime == 'halfhours') {
+			$eventLength = round($eventLength/30, 0, PHP_ROUND_HALF_UP);
+		}
+		else if ($unitOfTime == 'hours') {
+			$eventLength = round($eventLength/60, 0, PHP_ROUND_HALF_UP);
+		}
+		else {//if ($unitOfTime == 'minutes') {
+			// do nothing
+		}
+
+
+		return $eventLength;
+
 	}
 
 }

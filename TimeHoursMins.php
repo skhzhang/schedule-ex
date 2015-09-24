@@ -38,6 +38,12 @@ class TimeHoursMins {
 		return ($this->hours-1)%12+1 . ':' . sprintf("%02d", $this->minutes) . $period;
 	}
 
+	public function getHour() {
+		$result = $this->hours;
+		$result += $this->minutes*(50/30)*0.01;
+		return $result;
+	}
+
 	// SET
 
 	// $newHours must be an int between 0-23
@@ -66,6 +72,9 @@ class TimeHoursMins {
 		$this->minutes = $newMinutes;
 	}
 
+	// return 	0 if times are the same;
+	// 			positive if $this comes before $other
+	//			negative if $this comes after $other
 	public function getTimeDifference(TimeHoursMins $other) {
 
 		$hourDifference = $other->hours - $this->hours;

@@ -16,41 +16,89 @@
 			include "TimeHoursMins.php"; // TimeHoursMins class
 			include "SchedEvent.php"; // SchedEvent class
 			
-			// Examples of using TimeHoursMins and SchedEvent 
-			/*
+			// takes an array of SchedEvent's, and adds a SchedEvent to it barring no conflicts with SchedEvent's in the array
+			function addEvent(array $events, SchedEvent $event){
+
+				try {
+
+					// check for event conflicts
+					// conflict if:
+					//		- start time comes before the end time of another
+					//		- end time comes after the start time of another
+					foreach($events as $item) {
+
+						// compare start time of $event with the start/end times of $item's currently in the array
+						$startTimeCompStart = $event->getStartTime()->getTimeDifference($item->getStartTime());
+						$startTimeCompEnd = $event->getStartTime()->getTimeDifference($item->getEndTime());
+
+						// compare end time of $event with the start/end times of $item's currently in the array
+						$endTimeCompStart = $event->getEndTime()->getTimeDifference($item->getStartTime());
+						$endTimeCompEnd = $event->getEndTime()->getTimeDifference($item->getEndTime());
+
+						if ($startTimeCompStart <= 0 && $startTimeCompEnd > 0) { // start time of $event is between start/end times of $item
+							throw new Exception('Event time conflict - ' . $event->getTitle() . ' (' . $event->getTimeslot12h(true) . ') conflicts with ' . $item->getTitle() . ' (' . $item->getTimeslot12h(true) . ').');
+						}
+						else if ($endTimeCompStart < 0 && $endTimeCompEnd >= 0) { // end time of $event is between start/end times of $item
+							throw new Exception('Event time conflict - ' . $event->getTitle() . ' (' . $event->getTimeslot12h(true) . ') conflicts with ' . $item->getTitle() . ' (' . $item->getTimeslot12h(true) . ').');
+						}
+
+
+					}
+
+					array_push($events, $event);
+					usort($events, array("SchedEvent", "getEventTimeDifference"));
+
+				}
+				catch (Exception $e){
+    				echo '<span class="exception">Caught exception: ',  $e->getMessage(), "<br></span>";
+				}
+
+				return $events;
+			} 
+			
 			try {
 
-				$event1 = new SchedEvent('Monday', new TimeHoursMins(8, 30), new TimeHoursMins(9, 30), 'Underwater Basket Weaving', 'ARC');
-				$event2 = new SchedEvent('Monday', new TimeHoursMins(6, 30), new TimeHoursMins(7, 30), 'Water Polo', 'ARC');
-				$event3 = new SchedEvent('Monday', new TimeHoursMins(12, 30), new TimeHoursMins(13, 30), 'Astronomy 101', 'Ellis Hall');
-				$event4 = new SchedEvent('Monday', new TimeHoursMins(12, 30), new TimeHoursMins(13, 30), 'Astronomy 102', 'Ellis Hall');
-				$event5 = new SchedEvent('Monday', new TimeHoursMins(6, 30), new TimeHoursMins(7, 30), 'Water Polo', 'ARC');
-				$event6 = new SchedEvent('Monday', new TimeHoursMins(7, 30), new TimeHoursMins(8, 30), 'Swimming 101', 'ARC');
-				$event7 = new SchedEvent('Monday', new TimeHoursMins(7, 30), new TimeHoursMins(8, 45), 'Swimming 102', 'ARC');
-				$event8 = new SchedEvent('Monday', new TimeHoursMins(12, 30), new TimeHoursMins(13, 30), 'Lunch', 'ARC');
+				$events = array();
+				$events = array_values($events);
 
-				echo $event1->getTitle() . ": " . $event1->getTimeslot12h(true) . " at " . $event1->getLocation() ."<br>";
-				echo $event1->getTimeslot24h() . "<br>";
-				echo "<br>";
+				// create array in $events; one for each day of the week
+				for ($i = 0; $i < 5; $i++) {
+					$events[$i] = array();
+				}
 
-				$event1->setStartTime(new TimeHoursMins(9, 30));
-				$event1->setEndTime(new TimeHoursMins(11, 30));
-				$event1->setTitle('Underwater Basket Weaving 101');
-				$event1->setLocation('Lake Ontario');
+				// add events to the array
+				$events[0] = addEvent($events[0], new SchedEvent('Monday', new TimeHoursMins(11, 30), new TimeHoursMins(12, 30), 'CISC 326 Lecture', 'BioSci 1102', 'course1'));
+				$events[0] = addEvent($events[0], new SchedEvent('Monday', new TimeHoursMins(13, 00), new TimeHoursMins(14, 30), 'CISC 340 Lecture', 'Ellis Hall 333', 'course2'));
+				$events[0] = addEvent($events[0], new SchedEvent('Monday', new TimeHoursMins(16, 30), new TimeHoursMins(17, 30), 'CISC 365 Lecture', 'Walter Light Hall 205', 'course3'));
+				$events[0] = addEvent($events[0], new SchedEvent('Monday', new TimeHoursMins(18, 30), new TimeHoursMins(21, 30), 'ECON 111 Lecture', 'BioSci AUD', 'course4'));
 
-				$events = array($event1, $event2, $event3, $event4, $event5, $event6, $event7, $event8);
+				$events[1] = addEvent($events[1], new SchedEvent('Tuesday', new TimeHoursMins(13, 30), new TimeHoursMins(14, 30), 'CISC 326 Lecture', 'BioSci 1102', 'course1'));
+				$events[1] = addEvent($events[1], new SchedEvent('Tuesday', new TimeHoursMins(15, 30), new TimeHoursMins(16, 30), 'CISC 320 Lecture', 'Jeffrey Hall 128', 'course5'));
 
-				usort($events, array("SchedEvent", "getEventTimeDifference"));
+				$events[2] = addEvent($events[2], new SchedEvent('Wednesday', new TimeHoursMins(8, 30), new TimeHoursMins(9, 30), 'CISC 365 Lecture', 'Humphrey Hall AUD', 'course3'));
+				$events[2] = addEvent($events[2], new SchedEvent('Wednesday', new TimeHoursMins(11, 30), new TimeHoursMins(13, 00), 'CISC 340 Lecture', 'Ellis Hall 333', 'course2'));
+				$events[2] = addEvent($events[2], new SchedEvent('Wednesday', new TimeHoursMins(14, 30), new TimeHoursMins(16, 30), 'CISC 340 Lab', 'Goodwin Hall 248', 'course2'));
 
+				$events[3] = addEvent($events[3], new SchedEvent('Thursday', new TimeHoursMins(8, 30), new TimeHoursMins(10, 30), 'CISC 326 Tutorial', 'Miller Hall 201', 'course1'));
+				$events[3] = addEvent($events[3], new SchedEvent('Thursday', new TimeHoursMins(10, 30), new TimeHoursMins(11, 30), 'CISC 365 Lecture', 'Humphrey Hall AUD', 'course3'));
+				$events[3] = addEvent($events[3], new SchedEvent('Thursday', new TimeHoursMins(12, 30), new TimeHoursMins(13, 30), 'CISC 326 Lecture', 'BioSci 1102', 'course1'));
+				$events[3] = addEvent($events[3], new SchedEvent('Thursday', new TimeHoursMins(14, 30), new TimeHoursMins(15, 30), 'CISC 320 Lecture', 'Jeffrey Hall 128', 'course5'));
+				$events[3] = addEvent($events[3], new SchedEvent('Thursday', new TimeHoursMins(18, 30), new TimeHoursMins(20, 30), 'CISC 320 Tutorial', 'Ellis Hall 321', 'course5'));
+
+				$events[4] = addEvent($events[4], new SchedEvent('Friday', new TimeHoursMins(9, 30), new TimeHoursMins(11, 30), 'CISC 365 Lab', 'Jeffrey Hall 155', 'course3'));
+				$events[4] = addEvent($events[4], new SchedEvent('Friday', new TimeHoursMins(16, 30), new TimeHoursMins(17, 30), 'CISC 320 Lecture', 'Jeffrey Hall 128', 'course5'));
+
+				/*
 				foreach ($events as $item) {
 				    echo $item->getTitle() . ": " . $item->getTimeslot12h(true) . " at " . $item->getLocation() ."<br>";
 				}
+				*/
 			
 			}
 			catch (Exception $e) {
     			echo '<span class="exception">Caught exception: ',  $e->getMessage(), "<br></span>";
 			}
-			*/
+			
 
 		?>
 
@@ -139,563 +187,80 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="day"> <!-- Monday -->
-						<table>
-							<thead>
-								<tr class="day-name">
-									<th>Monday</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr> <!-- 8 - 9 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 10 - 11 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 11 - 12 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course1" rowspan="2">
-										<span class="event-time">11:30 to <br class="event-time-space">12:30<br/></span>
-										<div class="event-info truncate" title="CISC 326 Lecture - Biosci 1102">
-											CISC 326 Lecture
-											<br>
-											Biosci 1102
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 12 - 1 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr class="event"> <!-- 1 - 2 -->
-									<td class="course2" rowspan="3">
-										<span class="event-time">1:00 to <br class="event-time-space">2:30</span>
-										<div class="event-info">
-											CISC 340&nbsp;Lecture
-											<br>
-											Ellis Hall 333
-										</div>
-									</td>
-								</tr>
-								<tr>
-								</tr>
-								<tr> <!-- 2 - 3 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 3 - 4 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 4 - 5 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course3" rowspan="2">
-										<span class="event-time">4:30 to <br class="event-time-space">5:30</span>
-										<div class="event-info truncate" title="CISC 365 Lecture - Walter Light Hall 205">
-											CISC 365 Lecture
-											<br>
-											Walter&nbsp;Light&nbsp;Hall 205
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 5 - 6 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 6 - 7 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course4" rowspan="6">
-										<span class="event-time">6:30 to <br class="event-time-space">9:30</span>
-										<div class="event-info">
-											ECON 111 Lecture
-											<br>
-											Biosci Auditorium
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 7 - 8 -->
-								</tr>
-								<tr>
-								</tr>
-								<tr> <!-- 8 - 9 -->
-								</tr>
-								<tr>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
+
+					<?php
+
+					// create schedule for each day
+					for ($currentDay = 0; $currentDay < 5; $currentDay++) {
+
+						$events[$currentDay] = array_values($events[$currentDay]);
+
+						$currentEvent = 0;
+						$currentDayName = $events[$currentDay][0]->getWeekday();
+
+				 		echo '<div class="day"> <!-- ' . $currentDayName . '-->' ;	?>
+
+							<table>
+								<thead>
+									<tr class="day-name">
+										<?php 	echo ' <th> ' . $currentDayName . ' </th>' ; 	?>
+									</tr>
+								</thead>
+								<tbody>
+
+									<?php 
+
+									// create table row/cell for each half hour of the day
+									for ($hour = 8.0; $hour <= 21.50; $hour += 0.5) {
+
+										// if there's an event at this time, create a custom table row/cell
+										if (isset($events[$currentDay][$currentEvent]) && $events[$currentDay][$currentEvent]->getStartTime()->getHour() == $hour) {
+
+											$eventLengthHours = $events[$currentDay][$currentEvent]->getEventLength('halfhours');
+
+											echo "<tr class='event'>";
+												echo "<td class='" . $events[$currentDay][$currentEvent]->getCategory() .  "' rowspan=\"" . $eventLengthHours . "\">";
+													echo "<span class='event-time'>" . $events[$currentDay][$currentEvent]->getStartTime()->getTime12h(false) . " to <br class='event-time-space'>" . $events[$currentDay][$currentEvent]->getEndTime()->getTime12h(false) . "<br/></span>";
+													echo "<div class='event-info truncate' title='" . $events[$currentDay][$currentEvent]->getTitle() . " - " . $events[$currentDay][$currentEvent]->getLocation() ."'>";
+														
+														echo $events[$currentDay][$currentEvent]->getTitle();
+														echo "<br/>";
+														echo $events[$currentDay][$currentEvent]->getLocation();
+
+													echo "</div>";
+												echo "</td>";
+											echo "</tr>";
+
+											$currentEvent++;
+
+											// add table rows without the table cells
+											for ($i = 0; $i < $eventLengthHours * 0.5; $i += 0.5) {
+												
+												echo "<tr></tr><!-- Hour " . ($hour+$i) . "-->\n";
+
+											}
+
+											$hour += $eventLengthHours * 0.5;
+											$hour -= 0.5;
+										}
+										// no event, create empty table row/cell
+										else {
+											
+											echo "<tr>";
+											echo "<td></td>";
+											echo "</tr><!-- Hour " . $hour . "-->\n";
+
+										}
+									}
+
+									?>
+									
+								</tbody>
+							</table>
+						</div>
+					<?php 	}	?>
 					</div>
-					<div class="day"> <!-- Tuesday -->
-						<table>
-							<thead>
-								<tr class="day-name">
-									<th>Tuesday</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr> <!-- 8 - 9 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 10 - 11 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 11 - 12 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 12 - 1 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 1 - 2 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course1" rowspan="2">
-										<span class="event-time">1:30 to <br class="event-time-space">2:30</span>
-										<div class="event-info">
-											CISC&nbsp;326&nbsp;Lecture
-											<br>
-											Biosci 1102
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 2 - 3 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 3 - 4 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course5" rowspan="2">
-										<span class="event-time">3:30 to <br class="event-time-space">4:30</span>
-										<div class="event-info">
-											CISC 320 Lecture
-											<br>
-											Jeffrey Hall 128
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 4 - 5 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 5 - 6 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 6 - 7 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 7 - 8 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 8 - 9 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="day"> <!-- Wednesday -->
-						<table>
-							<thead>
-								<tr class="day-name">
-									<th>Wednesday</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr> <!-- 8 - 9 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course3 truncate" rowspan="2">
-										<span class="event-time">8:30 to <br class="event-time-space">9:30</span>
-										<div class="event-info truncate" title="CISC 365 Lecture - Humphrey Hall Auditorium">
-											CISC 365 Lecture
-											<br>
-											Humphrey Hall Auditorium
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 10 - 11 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 11 - 12 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course2" rowspan="3">
-										<span class="event-time">11:30 to <br class="event-time-space">1:00</span>
-										<div class="event-info">
-											CISC 340&nbsp;Lecture
-											<br>
-											Ellis Hall 333
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 12 - 1 -->
-								</tr>
-								<tr>
-								</tr>
-								<tr> <!-- 1 - 2 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 2 - 3 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course2" rowspan="4">
-										<span class="event-time">2:30 to <br class="event-time-space">4:30</span>
-										<div class="event-info">
-											CISC 340 Lab
-											<br>
-											Goodwin Hall 248
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 3 - 4 -->
-								</tr>
-								<tr>
-								</tr>
-								<tr> <!-- 4 - 5 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 5 - 6 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 6 - 7 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 7 - 8 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 8 - 9 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="day"> <!-- Thursday -->
-						<table>
-							<thead>
-								<tr class="day-name">
-									<th>Thursday</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr> <!-- 8 - 9 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 10 - 11 -->
-									<td></td>
-								</tr>
-								<tr class="event" >
-									<td class="course3" rowspan="2">
-										<div class="event-time">10:30 to <br class="event-time-space">11:30</div>
-										<div class="event-info truncate" title="CISC 365 Lecture - Humphrey Hall Auditorium">
-											CISC&nbsp;365&nbsp;Lecture
-											<br>
-											Humphrey Hall Auditorium
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 11 - 12 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 12 - 1 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course1" rowspan="2" style=";">
-										<span class="event-time">12:30 to <br class="event-time-space">1:30</span>
-										<div class="event-info truncate" title="CISC 326 Lecture - Biosci 1102">
-											CISC 326 Lecture
-											<br>
-											Biosci 1102
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 1 - 2 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 2 - 3 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course5" rowspan="2">
-										<span class="event-time">2:30 to <br class="event-time-space">3:30</span>
-										<div class="event-info truncate" title="CISC 320 Lecture - Jeffrey Hall 128">
-											CISC 320 Lecture
-											<br>
-											Jeffrey Hall&nbsp;128
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 3 - 4 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 4 - 5 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 5 - 6 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 6 - 7 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course5" rowspan="4">
-										<span class="event-time">6:30 to <br class="event-time-space">8:30</span>
-										<div class="event-info">
-											CISC 320 Tutorial
-											<br>
-											Ellis Hall 321
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 7 - 8 -->
-								</tr>
-								<tr>
-								</tr>
-								<tr> <!-- 8 - 9 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="day"> <!-- Friday -->
-						<table>
-							<thead>
-								<tr class="day-name">
-									<th>Friday</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr> <!-- 8 - 9 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course3" rowspan="2">
-										<span class="event-time">9:30 to <br class="event-time-space">10:30</span>
-										<div class="event-info">
-											CISC&nbsp;365&nbsp;Lab
-											<br>
-											Jeffrey&nbsp;Hall 155
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 10 - 11 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 11 - 12 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 12 - 1 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 1 - 2 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 2 - 3 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 3 - 4 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 4 - 5 -->
-									<td></td>
-								</tr>
-								<tr class="event">
-									<td class="course5" rowspan="2">
-										<span class="event-time">4:30 to <br class="event-time-space">5:30</span>
-										<div class="event-info">
-											CISC&nbsp;320&nbsp;Lecture
-											<br>
-											Jeffrey&nbsp;Hall&nbsp;128
-										</div>
-									</td>
-								</tr>
-								<tr> <!-- 5 - 6 -->
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 6 - 7 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 7 - 8 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 8 - 9 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-								<tr> <!-- 9 - 10 -->
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+			</div> <!-- end container-body -->
+		</div> <!-- end container -->
 	</body>
 </html>
