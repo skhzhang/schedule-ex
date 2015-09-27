@@ -47,7 +47,6 @@
 
 		// FRIDAY EVENTS
 		$schedule->addEvent(Schedule::FRIDAY, new SchedEvent('Friday', new TimeHoursMins(9, 30), new TimeHoursMins(11, 30), 'CISC 365 Lab', 'Jeffrey Hall 155', 'course3'));
-		$schedule->addEvent(Schedule::FRIDAY, new SchedEvent('Friday', new TimeHoursMins(9, 30), new TimeHoursMins(11, 30), 'CISC 365 Lab', 'Jeffrey Hall 155', 'course3'));
 		$schedule->addEvent(Schedule::FRIDAY, new SchedEvent('Friday', new TimeHoursMins(16, 30), new TimeHoursMins(17, 30), 'CISC 320 Lecture', 'Jeffrey Hall 128', 'course5'));
 
 		// display any scheduling conflict exceptions generated
